@@ -10,14 +10,23 @@ import java.util.List;
 
 @Controller
 public class StudentController {
-  private StudentService studentService;
-  public StudentController(StudentService studentService){
-      this.studentService = studentService;
-  }
-  @GetMapping("/students")
-  public String listStudent(Model model){
-      List<StudentDto> students = studentService.getAllStudents();
-      model.addAttribute("students",students);
-      return "students";
-  }
+    private StudentService studentService;
+
+    public StudentController(StudentService studentService){
+
+        this.studentService = studentService;
+    }
+    @GetMapping("/students")
+    public String ListStudent(Model model){
+        List<StudentDto> students = studentService.getAllStudents();
+        model.addAttribute("students",students);
+        return "students";
+    }
+
+    @GetMapping("/students/new")
+    public String newStudent(Model model){
+        StudentDto studentDto = new StudentDto();
+        model.addAttribute("students", studentDto);
+        return  "create-student";
+    }
 }
